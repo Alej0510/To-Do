@@ -1,37 +1,53 @@
 import { Toaster } from "./components/ui/sonner";
+import { useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import { useState } from "react";
+import TaskCounter from "./TaskCounter";
+import SearchBar from "./SearchBar";
+import FilterButton from "./FilterButton";
 
 function App() {
   const [isDark, setIsDark] = useState(false);
 
   return (
     <>
-      <Toaster 
-        position="top-center" 
-        visibleToasts={1}     
-        expand={true}         
-        closeButton={true}   
-        duration={2000}                 
+      <Toaster
+        position="top-center"
+        visibleToasts={1}
+        expand={true}
+        closeButton={true}
+        duration={2000}
       />
 
-     <div className={`min-h-screen transition-colors duration-300 ${isDark ? "bg-gray-900" : "bg-white"}`}>
+      <div className="bg-slate-200 min-h-screen">
+        <div className="max-w-4xl mx-auto">
+          <Header />
 
-       <Header />
+          <main className="max-w-4xl mt-4 ">
 
-    <div className="max-w-2xl mx-auto p-6 mt-4 border-2 border-gray-200 bg-white rounded-lg shadow-lg">
+            <div className="grid grid-cols-3 gap-4 mb-6">  
+            <TaskCounter />
+            <TaskCounter />
+            <TaskCounter />
+            </div>
+            
+            <SearchBar />
 
-     
-  
-    
-    </div>
+            <div className="flex gap-2">
+              <FilterButton />
+              <FilterButton />
+              <FilterButton />
+            </div>
 
-    </div>
-    
-    <Footer />
+            <button className="w-full py-2 mt-4 bg-blue-500 text-white rounded-lg shadow-md">+ Add new task</button>
+
+          </main>
+        </div>
+
+        <Footer />
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
