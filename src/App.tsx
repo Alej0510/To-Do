@@ -1,6 +1,6 @@
 import { Toaster } from "./components/ui/sonner";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import Header from "./components/Header";
 
@@ -23,18 +23,6 @@ import type { Task } from "./types";
 function App() {
 
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem('darkMode') === 'true';
-  });
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    localStorage.setItem('darkMode', darkMode.toString());
-  }, [darkMode]);
 
   const handleAddTask = (task: Task) => {
     setTasks(prevTask => [...prevTask, task]);
@@ -76,11 +64,11 @@ function App() {
 
 
 
-      <div className={`min-h-screen pt-4 ${darkMode ? 'bg-slate-900' : 'bg-slate-200'}`}>
+      <div className="bg-slate-200 min-h-screen pt-4">
 
         <div className="max-w-4xl mx-auto">
 
-          <Header totalTasks={totalTasks} pendingTasks={remainingTasks} darkMode={darkMode} setDarkMode={setDarkMode} />
+          <Header totalTasks={totalTasks} pendingTasks={remainingTasks} />
 
 
 
@@ -90,33 +78,33 @@ function App() {
 
             <div className="grid grid-cols-3 gap-4 mb-6">  
 
-            <TaskStats numberOfTasks={totalTasks} text="Total" color={darkMode ? "text-white" : "text-black"} darkMode={darkMode}/>
+            <TaskStats numberOfTasks={totalTasks} text="Total" color="text-black"/>
 
-            <TaskStats numberOfTasks={completedTasks} text="Completed" color={completedTasks === 0 ? 'text-red-500' : 'text-green-500'} darkMode={darkMode}/>
+            <TaskStats numberOfTasks={completedTasks} text="Completed" color={completedTasks === 0 ? 'text-red-500' : 'text-blue-500'}/>
 
-            <TaskStats numberOfTasks={remainingTasks} text="Remaining" color={remainingTasks === 0 ? 'text-green-500' : 'text-red-500'} darkMode={darkMode}/>
+            <TaskStats numberOfTasks={remainingTasks} text="Remaining" color={remainingTasks === 0 ? 'text-green-500' : 'text-red-500'}/>
 
             </div>
 
             
 
-            <SearchBar darkMode={darkMode} />
+            <SearchBar />
 
 
 
             <div className="flex gap-2">
 
-              <FilterButton text="All" darkMode={darkMode}/>
+              <FilterButton text="All"/>
 
-              <FilterButton text="Active" darkMode={darkMode}/>
+              <FilterButton text="Active"/>
 
-              <FilterButton text="Completed" darkMode={darkMode}/>
+              <FilterButton text="Completed"/>
 
             </div>
 
 
 
-            <AddTask onAddTask={handleAddTask} darkMode={darkMode}/>
+            <AddTask onAddTask={handleAddTask}/>
 
             {tasks.map(task => (
               <TaskItem 
@@ -124,7 +112,6 @@ function App() {
                 task={task}
                 onToggleTask={handleToggleTask}
                 onDeleteTask={handleDeleteTask}
-                darkMode={darkMode}
               />
             ))}
 
