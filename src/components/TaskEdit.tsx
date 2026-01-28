@@ -1,0 +1,111 @@
+import type { Task } from "../types";
+import { useState } from "react";
+import { toast } from "sonner";
+import { useTheme } from "../hooks/useTheme";
+
+interface TaskEditProps {
+  task: Task;
+  onClose: () => void;
+  onSave: (task: Task) => void;
+}
+
+export default function TaskEdit({ task, onClose, onSave }: TaskEditProps) {
+  const [editedTask, setEditedTask] = useState(task);
+
+  const { theme } = useTheme();
+
+  const handleSave = () => {
+    if (editedTask.title === "") {
+      toast.error("Title is required");
+      return;
+    }
+    onSave(editedTask);
+    onClose();
+    toast.success("Task updated successfully");
+  };
+  
+  return (
+    <>
+      <div
+        className="fixed inset-0 bg-black/40 transition-opacity duration-300 ease-in-out z-40"
+        onClick={onClose}
+      />
+
+      <div className={`fixed top-0 right-0 h-full w-full sm:w-96 border-l shadow-xl z-50 flex flex-col ${theme === "dark" ? "bg-slate-700 border-slate-500" : "bg-white border-slate-300"}`}>
+        <div className={`flex justify-between items-center p-4 sm:p-6 border-b ${theme === "dark" ? "border-slate-500" : "border-slate-300"}`}>
+          <h2 className={`text-xl font-semibold ${theme === "dark" ? "text-white" : "text-slate-800"}`}>Edit task</h2>
+          <button
+            onClick={onClose}
+            className={`text-gray-500 text-2xl cursor-pointer ${theme === "dark" ? "text-white hover:text-gray-400" : "text-slate-800 hover:text-gray-700 "}`}
+          >
+            ✕
+          </button>
+        </div>
+
+        <div className="flex-1 p-4 sm:p-6 overflow-y-auto">
+          <div className="mb-4">
+            <label className={`block text-sm font-medium text-gray-700 mb-2 ${theme === "dark" ? "text-white" : "text-slate-800"}`}>
+              Title
+            </label>
+            <input
+              type="text"
+              value={editedTask.title}
+              onChange={(e) =>
+                setEditedTask({ ...editedTask, title: e.target.value })
+              }
+              className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === "dark" ? "bg-slate-600 text-white border-slate-500" : "bg-white"}`}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className={`block text-sm font-medium text-gray-700 mb-2 ${theme === "dark" ? "text-white" : "text-slate-800"}`}>
+              Category
+            </label>
+            <select
+              name=""
+              id=""
+              className={`border rounded-lg p-2 mt-2 ${theme === "dark" ? "bg-slate-600 text-white border-slate-500" : "bg-white"}`}
+              value={editedTask.category}
+              onChange={(e) =>
+                setEditedTask({ ...editedTask, category: e.target.value })
+              }
+            >
+              <option value="👤 personal">👤 Personal</option>
+              <option value="💼 work">💼 Work</option>
+              <option value="🔥 urgent">🔥 Urgent</option>
+            </select>
+          </div>
+
+          <div className="mb-4">
+            <label className={`block text-sm font-medium text-gray-700 mb-2 ${theme === "dark" ? "text-white" : "text-slate-800"}`}>
+              Date
+            </label>
+            <input
+              type="date"
+              value={editedTask.date || ""}
+              onChange={(e) =>
+                setEditedTask({ ...editedTask, date: e.target.value })
+              }
+              className={`px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${theme === "dark" ? "bg-slate-600 text-white border-slate-500" : "bg-white"}`}
+            />
+          </div>
+        </div>
+
+        <div className={`p-4 sm:p-6 border-t flex gap-3 justify-end ${theme === "dark" ? "border-slate-500" : "border-slate-300"}`}>
+          <button
+            onClick={onClose}
+            className={`px-4 py-2 border rounded-md cursor-pointer ${theme === "dark" ? "bg-slate-600 text-white border-slate-500 hover:bg-slate-500" : "bg-white text-slate-800 border-gray-300 hover:bg-gray-50"}`}
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleSave}
+            className={`px-4 py-2 bg-blue-500 text-white rounded-md cursor-pointer hover:bg-blue-600`}
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </>
+  );
+}

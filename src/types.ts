@@ -5,3 +5,5 @@ export interface Task {
     category: string;
     date: string;
 }
+
+export type Filter = 'all' | 'active' | 'completed';
