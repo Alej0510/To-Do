@@ -4,6 +4,8 @@ import { useState } from "react";
 
 import { useTheme } from "./hooks/useTheme";
 
+import { useMemo } from "react";
+
 import type { Task, Filter } from "./types";
 
 import Header from "./components/Header";
@@ -49,18 +51,20 @@ function App() {
 
   const [searchTask, setSearchTask] = useState("");
 
-  const filteredTasks = tasks.filter((task) => {
-    let matchesFilter = true;
-    if (filter === "all") matchesFilter = true;
-    if (filter === "active") matchesFilter = !task.completed;
-    if (filter === "completed") matchesFilter = task.completed;
+  const filteredTasks = useMemo(() => (
+    tasks.filter((task) => {
+      const matchesFilter =
+        filter === "all" ||
+        (filter === "active" && !task.completed) ||
+        (filter === "completed" && task.completed);
 
-    const matchesSearch = task.title
-      .toLowerCase()
-      .includes(searchTask.toLowerCase());
+      const matchesSearch = task.title
+        .toLowerCase()
+        .includes(searchTask.toLowerCase());
 
-    return matchesFilter && matchesSearch;
-  });
+      return matchesFilter && matchesSearch;
+    })
+  ), [tasks, filter, searchTask]);
 
   const [editTask, setEditTask] = useState<Task | null>(null);
 

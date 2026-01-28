@@ -10,7 +10,7 @@ export default function Header({ totalTasks, pendingTasks }: HeaderProps) {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="text-2xl font-bold mb-4 pt-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+    <div className="text-2xl font-bold mb-4 pt-4 flex justify-between sm:items-center gap-4 flex-wrap">
       <div>
         <h1
           className={`text-3xl sm:text-4xl ${theme === "dark" ? "text-white" : "text-black"}`}
