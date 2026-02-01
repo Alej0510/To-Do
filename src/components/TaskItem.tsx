@@ -1,7 +1,6 @@
 import { Pencil } from "lucide-react";
 import { Trash } from "lucide-react";
 import { Calendar } from "lucide-react";
-import { useTheme } from "../hooks/useTheme";
 import type { Task } from "../types";
 
 interface TaskItemProps {
@@ -17,27 +16,23 @@ export default function TaskItem({
   onDeleteTask,
   onEditTask,
 }: TaskItemProps) {
-  const { theme } = useTheme();
 
   const getCategoryColors = (category: string) => {
-    const isDark = theme === "dark";
     switch (category) {
       case "👤 personal":
-        return isDark ? "bg-yellow-500 text-white" : "bg-yellow-100 text-black";
+        return "bg-yellow-100 text-black dark:bg-yellow-500 dark:text-white";
       case "💼 work":
-        return isDark ? "bg-blue-800 text-white" : "bg-blue-200 text-black";
+        return "bg-blue-200 text-black dark:bg-blue-800 dark:text-white";
       case "🔥 urgent":
-        return isDark ? "bg-red-800 text-white" : "bg-red-200 text-black";
+        return "bg-red-200 text-black dark:bg-red-800 dark:text-white";
       default:
-        return isDark ? "bg-slate-800 text-white" : "bg-slate-200 text-black";
+        return "bg-slate-200 text-black dark:bg-slate-800 dark:text-white";
     }
   };
   return (
     <>
       <div
-        className={`flex flex-col sm:flex-row sm:justify-between items-stretch sm:items-center gap-4 p-4 rounded-lg shadow-md border mt-4 py-6 transition-all duration-200 ${
-          theme === "dark" ? "bg-slate-700" : "bg-white"
-        } ${task.completed ? "opacity-75 border-slate-300" : "border-transparent"}`}
+        className={`flex flex-col sm:flex-row sm:justify-between items-stretch sm:items-center gap-4 p-4 rounded-lg shadow-md border mt-4 py-6 transition-all duration-200 bg-white dark:bg-slate-700 ${task.completed ? "border-slate-300 opacity-75" : "border-transparent"}`}
       >
         <div className="flex-1">
           <div className="flex items-start gap-4">
@@ -50,7 +45,7 @@ export default function TaskItem({
             />
             <div className="flex-1">
               <p
-                className={`font-semibold text-xl leading-tight ${task.completed ? "line-through text-slate-400" : theme === "dark" ? "text-white" : "text-slate-800"}`}
+                className={`font-semibold text-xl leading-tight ${task.completed ? "line-through text-slate-400" : "text-slate-800 dark:text-white"}`}
               >
                 {task.title}
               </p>
@@ -60,9 +55,7 @@ export default function TaskItem({
             <span
               className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
                 task.completed
-                  ? theme === "dark"
-                    ? "bg-slate-800 text-slate-400"
-                    : "bg-slate-100 text-slate-500"
+                  ? "bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400"
                   : getCategoryColors(task.category)
               }`}
             >
@@ -72,12 +65,8 @@ export default function TaskItem({
               <span
                 className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium ${
                   task.completed
-                    ? theme === "dark"
-                      ? "bg-slate-800 text-white"
-                      : "bg-slate-200 text-black"
-                    : theme === "dark"
-                      ? "bg-green-800 text-white"
-                      : "bg-green-200 text-black"
+                    ? "bg-slate-200 text-black dark:bg-slate-800 dark:text-white"
+                    : "bg-green-200 text-black dark:bg-green-800 dark:text-white"
                 }`}
               >
                 <Calendar size={14} />
@@ -90,12 +79,12 @@ export default function TaskItem({
         <div className="flex items-center gap-3 self-end sm:self-auto">
           <button
             onClick={() => onEditTask(task)}
-            className={`${task.completed ? "text-slate-400" : theme === "dark" ? "text-slate-300" : "text-slate-600"} hover:text-blue-500 transition-colors cursor-pointer`}
+            className={`${task.completed ? "text-slate-400" : "text-slate-600 dark:text-slate-300"} hover:text-blue-500 transition-colors cursor-pointer`}
           >
             <Pencil />
           </button>
           <button
-            className={`${task.completed ? "text-slate-400" : theme === "dark" ? "text-slate-300" : "text-slate-600"} hover:text-red-500 transition-colors cursor-pointer`}
+            className={`${task.completed ? "text-slate-400" : "text-slate-600 dark:text-slate-300"} hover:text-red-500 transition-colors cursor-pointer`}
             onClick={() => onDeleteTask(task.id)}
           >
             <Trash />

@@ -1,7 +1,6 @@
 import { X } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { useTheme } from "../hooks/useTheme";
 import type { Task } from "../types";
 
 interface AddTaskProps {
@@ -9,7 +8,6 @@ interface AddTaskProps {
 }
 
 export default function AddTask({ onAddTask }: AddTaskProps) {
-  const { theme } = useTheme();
   const [showAddTask, setShowAddTask] = useState(false);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("👤 personal");
@@ -51,18 +49,16 @@ export default function AddTask({ onAddTask }: AddTaskProps) {
       </button>
 
       <div
-        className={`p-4 rounded-lg shadow-md mt-4 ${showAddTask ? "" : "hidden"} duration-200 ${
-          theme === "dark" ? "bg-slate-700" : "bg-white"
-        }`}
+        className={`p-4 rounded-lg shadow-md mt-4 ${showAddTask ? "" : "hidden"} duration-200 bg-white dark:bg-slate-700`}
       >
         <div className="flex items-center gap-2 justify-between">
           <h2
-            className={`text-lg font-bold ${theme === "dark" ? "text-white" : "text-black"}`}
+            className="text-lg font-bold text-black dark:text-white"
           >
             New task
           </h2>
           <button
-            className={`cursor-pointer ${theme === "dark" ? "text-gray-300 hover:text-white" : "text-gray-600"}`}
+            className="cursor-pointer text-gray-600 hover:text-gray-300 dark:text-gray-300 dark:hover:text-white"
             onClick={handleShowTaskCard}
           >
             <X size={26} />
@@ -72,34 +68,26 @@ export default function AddTask({ onAddTask }: AddTaskProps) {
         <input
           type="text"
           placeholder="Add a task"
-          className={`w-full border rounded-lg p-2 mt-2 focus:outline-none ${
-            theme === "dark"
-              ? "bg-slate-600 border-slate-500 text-white placeholder-gray-200"
-              : "border-slate-300"
-          }`}
+          className="w-full border rounded-lg p-2 mt-2 focus:outline-none border-slate-300 dark:bg-slate-600 dark:border-slate-500 dark:text-white dark:placeholder-gray-200"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 mt-3 w-full">
           <p
-            className={`font-bold ${theme === "dark" ? "text-white" : "text-black"}`}
+            className="font-bold text-black dark:text-white"
           >
             Category
           </p>
           <p
-            className={`font-bold ${theme === "dark" ? "text-white" : "text-black"}`}
+            className="font-bold text-black dark:text-white"
           >
             Date
           </p>
           <select
             name=""
             id=""
-            className={`border rounded-lg p-2 mt-2 ${
-              theme === "dark"
-                ? "bg-slate-600 border-slate-500 text-white"
-                : "border-slate-300"
-            }`}
+            className="border rounded-lg p-2 mt-2 border-slate-300 dark:bg-slate-600 dark:border-slate-500 dark:text-white"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
@@ -110,11 +98,7 @@ export default function AddTask({ onAddTask }: AddTaskProps) {
 
           <input
             type="date"
-            className={`border rounded-lg p-2 mt-2 ${
-              theme === "dark"
-                ? "bg-slate-600 border-slate-500 text-white"
-                : "border-slate-300"
-            }`}
+            className="border rounded-lg p-2 mt-2 border-slate-300 dark:bg-slate-600 dark:border-slate-500 dark:text-white"
             value={date}
             onChange={(e) => setDate(e.target.value)}
           />

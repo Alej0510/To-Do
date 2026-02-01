@@ -1,10 +1,10 @@
 import { Toaster } from "./components/ui/sonner";
 
-import { useState } from "react";
-
-import { useTheme } from "./hooks/useTheme";
+import { useEffect, useState } from "react";
 
 import { useMemo } from "react";
+
+import { useThemeStore } from "./store/useThemeStore";
 
 import type { Task, Filter } from "./types";
 
@@ -21,6 +21,8 @@ import TaskItem from "./components/TaskItem";
 import AddTask from "./components/AddTask";
 
 import TaskEdit from "./components/TaskEdit";
+
+ 
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -68,7 +70,15 @@ function App() {
 
   const [editTask, setEditTask] = useState<Task | null>(null);
 
-  const { theme } = useTheme();
+  const theme = useThemeStore((state) => state.theme);
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
 
   return (
     <>
@@ -80,7 +90,7 @@ function App() {
       />
 
       <div
-        className={`bg-slate-200 min-h-screen pt-4 px-4 sm:px-6 transition-colors duration-300 ${theme === "dark" ? "bg-slate-900" : "bg-slate-200"}`}
+        className="bg-slate-200 min-h-screen pt-4 px-4 sm:px-6 transition-colors duration-300 dark:bg-slate-900"
       >
         <div className="max-w-4xl mx-auto">
           <Header totalTasks={totalTasks} pendingTasks={remainingTasks} />
@@ -90,7 +100,7 @@ function App() {
               <TaskStats
                 numberOfTasks={totalTasks}
                 text="Total"
-                color={theme === "dark" ? "text-white" : "text-black"}
+                color="text-black dark:text-white"
               />
 
               <TaskStats
@@ -107,44 +117,26 @@ function App() {
             </div>
 
             <div
-              className={`${theme === "dark" ? "bg-slate-700 p-3 rounded-lg" : "bg-white p-3 rounded-lg"}`}
+              className="bg-white p-3 rounded-lg dark:bg-slate-700"
             >
               <SearchBar value={searchTask} onChange={setSearchTask} />
             </div>
 
             <div className="flex flex-wrap gap-2">
               <button
-                className={`flex-1 sm:flex-none px-5 py-2 mt-4 rounded-lg duration-200 cursor-pointer focus:bg-blue-500 focus:text-white ${
-                  filter === "all"
-                    ? "bg-blue-500 text-white"
-                    : theme === "dark"
-                      ? "text-white bg-slate-700 hover:bg-slate-600"
-                      : "text-black bg-white"
-                }`}
+                className="flex-1 sm:flex-none px-5 py-2 mt-4 rounded-lg duration-200 cursor-pointer focus:bg-blue-500 focus:text-white text-black bg-white hover:bg-gray-100 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-600"
                 onClick={() => setFilter("all")}
               >
                 All
               </button>
               <button
-                className={`flex-1 sm:flex-none px-5 py-2 mt-4 rounded-lg duration-200 cursor-pointer focus:bg-blue-500 focus:text-white ${
-                  filter === "active"
-                    ? "bg-blue-500 text-white"
-                    : theme === "dark"
-                      ? "text-white bg-slate-700 hover:bg-slate-600"
-                      : "text-black bg-white"
-                }`}
+                className="flex-1 sm:flex-none px-5 py-2 mt-4 rounded-lg duration-200 cursor-pointer focus:bg-blue-500 focus:text-white text-black bg-white hover:bg-gray-100 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-600"
                 onClick={() => setFilter("active")}
               >
                 Active
               </button>
               <button
-                className={`flex-1 sm:flex-none px-5 py-2 mt-4 rounded-lg duration-200 cursor-pointer focus:bg-blue-500 focus:text-white ${
-                  filter === "completed"
-                    ? "bg-blue-500 text-white"
-                    : theme === "dark"
-                      ? "text-white bg-slate-700 hover:bg-slate-600"
-                      : "text-black bg-white"
-                }`}
+                className="flex-1 sm:flex-none px-5 py-2 mt-4 rounded-lg duration-200 cursor-pointer focus:bg-blue-500 focus:text-white text-black bg-white hover:bg-gray-100 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-600"
                 onClick={() => setFilter("completed")}
               >
                 Completed
