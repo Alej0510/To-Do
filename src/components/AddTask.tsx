@@ -73,35 +73,39 @@ export default function AddTask({ onAddTask }: AddTaskProps) {
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 mt-3 w-full">
-          <p
-            className="font-bold text-black dark:text-white"
-          >
-            Category
-          </p>
-          <p
-            className="font-bold text-black dark:text-white"
-          >
-            Date
-          </p>
-          <select
-            name=""
-            id=""
-            className="border rounded-lg p-2 mt-2 border-slate-300 dark:bg-slate-600 dark:border-slate-500 dark:text-white"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value="👤 personal">👤 Personal</option>
-            <option value="💼 work">💼 Work</option>
-            <option value="🔥 urgent">🔥 Urgent</option>
-          </select>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 mt-3 w-full">
+          <div>
+            <p
+              className="font-bold text-black dark:text-white mb-2"
+            >
+              Category
+            </p>
+            <select
+              name=""
+              id=""
+              className="border rounded-lg p-2 w-full border-slate-300 dark:bg-slate-600 dark:border-slate-500 dark:text-white"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="👤 personal">👤 Personal</option>
+              <option value="💼 work">💼 Work</option>
+              <option value="🔥 urgent">🔥 Urgent</option>
+            </select>
+          </div>
 
-          <input
-            type="date"
-            className="border rounded-lg p-2 mt-2 border-slate-300 dark:bg-slate-600 dark:border-slate-500 dark:text-white"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
+          <div>
+            <p
+              className="font-bold text-black dark:text-white mb-2"
+            >
+              Date
+            </p>
+            <input
+              type="date"
+              className="border rounded-lg p-2 w-full border-slate-300 dark:bg-slate-600 dark:border-slate-500 dark:text-white"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
+          </div>
         </div>
 
         <button
