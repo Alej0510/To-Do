@@ -1,8 +1,15 @@
 **To-Do List App (React + TypeScript)**
 
-A modern and minimal To-Do application built with React, TypeScript, and Tailwind CSS
+A modern and minimal To-Do application built with React, TypeScript, Zustand, and Tailwind CSS.
 
-Features
+**Tech Stack:**
+-React 
+-TypeScript 
+-Zustand 
+-Tailwind CSS 
+-LocalStorage for State persistence
+
+**Features: **
 
 -Create, edit, complete and delete tasks
 
@@ -20,6 +27,6 @@ Features
 
 -Light / Dark mode 
 
--Theme persistence with localStorage
+-Theme and tasks persistence
 
 -User feedback with toast notifications
