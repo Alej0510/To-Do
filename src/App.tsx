@@ -1,57 +1,43 @@
+import { useState, useMemo } from "react";
 import { Toaster } from "./components/ui/sonner";
-
-import { useEffect, useState } from "react";
-
-import { useMemo } from "react";
-
 import { useThemeStore } from "./store/useThemeStore";
-
-import type { Task, Filter } from "./types";
+import { useTaskStore } from "./store/TaskStore";
+import type { Filter } from "./types";
 
 import Header from "./components/Header";
-
 import Footer from "./components/Footer";
-
 import TaskStats from "./components/TaskStats";
-
 import SearchBar from "./components/SearchBar";
-
 import TaskItem from "./components/TaskItem";
-
 import AddTask from "./components/AddTask";
-
 import TaskEdit from "./components/TaskEdit";
 
  
+useThemeStore.getState().initTheme();
 
 function App() {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  
 
-  const handleAddTask = (task: Task) => {
-    setTasks((prevTask) => [...prevTask, task]);
-  };
+  const tasks = useTaskStore((state) => state.tasks);
 
-  const handleToggleTask = (id: string) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task,
-      ),
-    );
-  };
+  const totalTasks = useTaskStore((state) => state.getTotalTasks());
 
-  const handleDeleteTask = (id: string) => {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
-  };
+  const completedTasks = useTaskStore((state) => state.getCompletedTasks());
 
-  const totalTasks = tasks.length;
+  const remainingTasks = useTaskStore((state) => state.getRemainingTasks());
 
-  const completedTasks = tasks.filter((task) => task.completed).length;
+  const searchTask = useTaskStore((state) => state.searchTask);
 
-  const remainingTasks = totalTasks - completedTasks;
+  const editTask = useTaskStore((state) => state.editTask);
+
+  const addTask = useTaskStore((state) => state.addTask);
+  const toggleTask = useTaskStore((state) => state.toggleTask);
+  const deleteTask = useTaskStore((state) => state.deleteTask);
+  const updateTask = useTaskStore((state) => state.updateTask);
+  const setSearchTask = useTaskStore((state) => state.setSearchTask);
+  const setEditTask = useTaskStore((state) => state.setEditTask);
 
   const [filter, setFilter] = useState<Filter>("all");
-
-  const [searchTask, setSearchTask] = useState("");
 
   const filteredTasks = useMemo(() => (
     tasks.filter((task) => {
@@ -68,19 +54,7 @@ function App() {
     })
   ), [tasks, filter, searchTask]);
 
-  const [editTask, setEditTask] = useState<Task | null>(null);
-
-  const theme = useThemeStore((state) => state.theme);
-
-  useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [theme]);
-
-  return (
+    return (
     <>
       <Toaster
         position="top-center"
@@ -143,7 +117,7 @@ function App() {
               </button>
             </div>
 
-            <AddTask onAddTask={handleAddTask} />
+            <AddTask onAddTask={addTask} />
 
             {filteredTasks.length === 0 ? (
               <div className="text-center py-8">
@@ -154,8 +128,8 @@ function App() {
                 <TaskItem
                   key={task.id}
                   task={task}
-                  onToggleTask={handleToggleTask}
-                  onDeleteTask={handleDeleteTask}
+                  onToggleTask={toggleTask}
+                  onDeleteTask={deleteTask}
                   onEditTask={setEditTask}
                 />
               ))
@@ -166,11 +140,7 @@ function App() {
                 task={editTask}
                 onClose={() => setEditTask(null)}
                 onSave={(updatedTask) => {
-                  setTasks((prev) =>
-                    prev.map((t) =>
-                      t.id === updatedTask.id ? updatedTask : t,
-                    ),
-                  );
+                  updateTask(updatedTask);
                   setEditTask(null);
                 }}
               />

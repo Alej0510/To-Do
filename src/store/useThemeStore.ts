@@ -6,15 +6,33 @@ type ThemeType = "light" | "dark";
 interface ThemeStore {
   theme: ThemeType;
   toggleTheme: () => void;
+  initTheme: () => void;
 }
+
+const applyTheme = (theme: ThemeType) => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+};
 
 export const useThemeStore = create<ThemeStore>()(
   persist<ThemeStore>(
-    (set) => ({
+    (set, get) => ({
       theme: "light",
-      toggleTheme: () =>
-        set((state) => ({ theme: state.theme === "light" ? "dark" : "light" })),
+      toggleTheme: () => {
+        set((state) => {
+          const newTheme = state.theme === "light" ? "dark" : "light";
+          applyTheme(newTheme);
+          return { theme: newTheme };
+        });
+      },
+      initTheme: () => {
+        applyTheme(get().theme);
+      },
     }),
-    { name: "theme" },
-  ),
+    { name: "theme" }
+  )
 );
+
