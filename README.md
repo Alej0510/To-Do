@@ -5,9 +5,13 @@ A modern and minimal To-Do application built with React, TypeScript, Zustand, an
 **Tech Stack:**
 
 -React 
+
 -TypeScript 
+
 -Zustand 
+
 -Tailwind CSS 
+
 -LocalStorage for State persistence
 
 **Features:**
