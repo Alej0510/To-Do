@@ -2,9 +2,9 @@
 
 A clean, efficient, and feature-rich To-Do application designed for productivity. Built with a modern tech stack to ensure high performance and a smooth user experience.
 
-![to-do mockup](design/mockup1.png)
+<img src="design/mockup1.png" alt="to-do mockup" width="50%" />
 
-![to-do mockup](design/mockup2.png)
+<img src="design/mockup2.png" alt="to-do mockup" width="50%" />
 
 ## Live Demo
 
