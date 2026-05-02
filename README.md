@@ -2,9 +2,9 @@
 
 A clean, efficient, and feature-rich To-Do application designed for productivity. Built with a modern tech stack to ensure high performance and a smooth user experience.
 
-<img src="design/mockup1.png" alt="to-do mockup" width="50%" />
+<img src="design/mockup1.png" alt="to-do mockup" width="70%" />
 
-<img src="design/mockup2.png" alt="to-do mockup" width="50%" />
+<img src="design/mockup2.png" alt="to-do mockup" width="70%" />
 
 ## Live Demo
 
@@ -67,12 +67,19 @@ npm, pnpm or yarn
 ## Project Structure
 
 src/
+
 ├── components/      Reusable UI components
+
 ├── lib/             Utility functions and shared helper logic
+
 ├── store/           Zustand state management for tasks and persistence
+
 ├── App.tsx          Main application component and core logic
+
 ├── index.css        Global styles and Tailwind CSS directives
+
 ├── main.tsx         Application entry point
+
 └── types.ts         TypeScript interfaces and global type definitions
 
 ## License
