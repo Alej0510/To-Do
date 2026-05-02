@@ -1,37 +1,77 @@
-**To-Do List App (React + TypeScript)**
 
-A modern and minimal To-Do application built with React, TypeScript, Zustand, and Tailwind CSS.
 
-**Tech Stack:**
+# Modern To-Do App
 
--React 
+A clean, efficient, and feature-rich To-Do application designed for productivity. Built with a modern tech stack to ensure high performance and a smooth user experience.
 
--TypeScript 
+## Live Demo
 
--Zustand 
+https://to-do-two-wheat.vercel.app/
 
--Tailwind CSS 
+## Key Features
 
--LocalStorage for State persistence
+**Task Management:** Create, edit, complete, and delete tasks with ease.
 
-**Features:**
+**Categorization:** Organize your tasks by category (Personal, Work, Urgent).
 
--Create, edit, complete and delete tasks
+**Advanced Filtering:** Easily filter tasks by status (All, Active, Completed) or search by title.
 
--Search tasks by title
+**Side Panel Editing:** Streamlined editing experience using a dedicated side panel.
 
--Filter tasks: All / Active / Completed
+**Real-time Statistics:** Track your progress with live task analytics.
 
--Real-time task statistics
+**Persistence:** All tasks and your theme preference are saved automatically via LocalStorage.
 
--Task categories (Personal, Work, Urgent)
+**Dark/Light Mode:** Toggle between themes for a comfortable viewing experience.
 
--Optional date per task
+**User Feedback:** Built-in toast notifications for clear status updates.
 
--Side panel task editing
+## Tech Stack
 
--Light / Dark mode 
+**Frontend:** React (Vite)
 
--Theme and tasks persistence
+**Language:** TypeScript
 
--User feedback with toast notifications
+**State Management:** Zustand
+
+**Styling:** Tailwind CSS
+
+**Deployment:** Vercel
+
+## Getting Started
+
+**Prerequisites**
+
+Node.js (v18 or higher recommended)
+
+npm, pnpm or yarn
+
+### 1) Install dependencies:
+
+   npm install
+   # or
+   pnpm install
+   # or
+   yarn install
+   
+### 2)Start the development server:
+
+  npm run dev
+  # or
+  pnpm run dev
+  # or
+  yarn dev
+  
+## Project Structure
+
+src/
+├── components/      Reusable UI components
+├── lib/             Utility functions and shared helper logic
+├── store/           Zustand state management for tasks and persistence
+├── App.tsx          Main application component and core logic
+├── index.css        Global styles and Tailwind CSS directives
+├── main.tsx         Application entry point
+└── types.ts         TypeScript interfaces and global type definitions
+
+## License
+This project is licensed under the MIT License.
