@@ -51,17 +51,17 @@ npm, pnpm or yarn
 ### 1) Install dependencies:
 
    npm install
-   ### or
+   or
    pnpm install
-   ### or
+   or
    yarn install
    
 ### 2)Start the development server:
 
   npm run dev
-  ### or
+  or
   pnpm run dev
-  ### or
+  or
   yarn dev
   
 ## Project Structure
