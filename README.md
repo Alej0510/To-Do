@@ -4,6 +4,7 @@ A clean, efficient, and feature-rich To-Do application designed for productivity
 
 <img src="design/mockup1.png" alt="to-do mockup" width="70%" />
 
+<img src="design/mockup2.png" alt="to-do mockup" width="70%" />
 
 ## Live Demo
 
