@@ -1,8 +1,10 @@
-
-
 # Modern To-Do App
 
 A clean, efficient, and feature-rich To-Do application designed for productivity. Built with a modern tech stack to ensure high performance and a smooth user experience.
+
+![to-do mockup](design/mockup1.png)
+
+![to-do mockup](design/mockup2.png)
 
 ## Live Demo
 
@@ -49,17 +51,17 @@ npm, pnpm or yarn
 ### 1) Install dependencies:
 
    npm install
-   # or
+   ### or
    pnpm install
-   # or
+   ### or
    yarn install
    
 ### 2)Start the development server:
 
   npm run dev
-  # or
+  ### or
   pnpm run dev
-  # or
+  ### or
   yarn dev
   
 ## Project Structure
